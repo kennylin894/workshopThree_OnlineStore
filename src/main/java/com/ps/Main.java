@@ -92,6 +92,8 @@ public class Main {
                     }
                     System.out.println("Now please enter the sku,name, price or department you want to search by:");
                     String userFilterValue = stringScanner.nextLine();
+                    System.out.println("These are the following products in the " + userFilterValue + " category.");
+                    System.out.println("=========================================================================");
                     //gets all the filtered products
                     ArrayList<Product> filteredProducts = HelperMethods.filteredDisplayProducts(userFilterCategory, userFilterValue, priceFilter);
                     for (Product product : filteredProducts) {
@@ -156,6 +158,8 @@ public class Main {
                             System.out.println("Your cart is empty.");
                             System.out.println();
                         } else {
+                            System.out.println("These are the items in your cart.");
+                            System.out.println("=================================");
                             for (Product product : cart) {
                                 System.out.println(product.getSku() + "|" + product.getName() + "|$" + product.getPrice() + "|" + product.getDepartment() + "| x - " + product.getCount());
                             }
@@ -169,7 +173,7 @@ public class Main {
                             System.out.println();
                             break;
                         } else {
-                            System.out.println("What item would you like to remove?");
+                            System.out.println("What item would you like to remove from your cart?");
                             for (Product product : cart) {
                                 System.out.println(product.getSku() + "|" + product.getName() + " - $" + product.getPrice() + "|" + product.getDepartment() + "| x - " + product.getCount());
                             }
