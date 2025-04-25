@@ -29,7 +29,7 @@ public class HelperMethods {
         return cart;
     }
 
-    public static ArrayList<Product> filteredDisplayProducts(String filterBy, String searchedValue,double priceFilter) {
+    public static ArrayList<Product> filteredDisplayProducts(String filterBy, String searchedValue, double priceFilter) {
         ArrayList<Product> filteredProducts = new ArrayList<>();
         if (filterBy.toLowerCase().equals("sku")) {
             for (Product product : getInventory()) {
@@ -43,32 +43,25 @@ public class HelperMethods {
                     filteredProducts.add(product);
                 }
             }
-        //less than
+            //less than
         } else if (filterBy.toLowerCase().equals("price") && priceFilter == 1) {
             Double searchedValueDouble = Double.parseDouble(searchedValue);
-            for(Product product: getInventory())
-            {
-                if(product.getPrice() <= searchedValueDouble)
-                {
+            for (Product product : getInventory()) {
+                if (product.getPrice() <= searchedValueDouble) {
                     filteredProducts.add(product);
                 }
             }
-        //greater than
-        } else if (filterBy.toLowerCase().equals("price") && priceFilter == 2)
-        {
+            //greater than
+        } else if (filterBy.toLowerCase().equals("price") && priceFilter == 2) {
             Double searchedValueDouble = Double.parseDouble(searchedValue);
-            for(Product product: getInventory())
-            {
-                if(product.getPrice() >= searchedValueDouble)
-                {
+            for (Product product : getInventory()) {
+                if (product.getPrice() >= searchedValueDouble) {
                     filteredProducts.add(product);
                 }
             }
-        }
-        else if (filterBy.toLowerCase().equals("department"))
-        {
-            for(Product product: getInventory()) {
-                if(product.getDepartment().toLowerCase().equals(searchedValue)) {
+        } else if (filterBy.toLowerCase().equals("department")) {
+            for (Product product : getInventory()) {
+                if (product.getDepartment().toLowerCase().equals(searchedValue)) {
                     filteredProducts.add(product);
                 }
             }
@@ -78,29 +71,24 @@ public class HelperMethods {
 
     public static double getTotal(ArrayList<Product> cart) {
         double total = 0;
-        for(Product product: cart)
-        {
+        for (Product product : cart) {
             total += product.getPrice();
         }
         return total;
     }
 
-    public static void removeFromCart(String name,ArrayList<Product> cart) {
+    public static void removeFromCart(String name, ArrayList<Product> cart) {
         boolean found = false;
-        for(Product product:cart)
-        {
-            if(name.toLowerCase().equals(product.getName().toLowerCase()))
-            {
-                cart.remove(product.getName());
+        for (Product product : cart) {
+            if (name.toLowerCase().equals(product.getName().toLowerCase())) {
+                cart.remove(product);
                 found = true;
+                break;
             }
         }
-        if(found == true)
-        {
+        if (found == true) {
             System.out.println(name + "has been successfully removed from your cart.");
-        }
-        else
-        {
+        } else {
             System.out.println("Item doesn't exist in your cart.");
         }
     }
