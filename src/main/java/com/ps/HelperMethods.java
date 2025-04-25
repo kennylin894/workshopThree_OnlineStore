@@ -217,7 +217,6 @@ public class HelperMethods {
         receipt.append("=========================");
         try
         {
-            System.out.println("Printing Receipt.");
             FileWriter fileWriter = new FileWriter("Receipts/" + fileDate + ".txt");
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(receipt.toString());
