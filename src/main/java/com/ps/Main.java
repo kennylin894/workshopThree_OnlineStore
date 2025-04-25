@@ -143,6 +143,7 @@ public class Main {
                         if(cart.isEmpty())
                         {
                             System.out.println("Your cart is empty.");
+                            System.out.println();
                             break;
                         }
                         System.out.println("Welcome to the checkout.");
@@ -182,5 +183,15 @@ public class Main {
                     }
             }
         } while (mainMenuCommand != 0);
+        System.out.println("             Thank you for shopping with us!         ");
+        System.out.println("=====================================================");
+        System.out.println("    BBBB    Y   Y   EEEE     BBBB    Y   Y   EEEE    ");
+        System.out.println("    B   B    Y Y    E        B   B    Y Y    E       ");
+        System.out.println("    BBBB      Y     EEEE     BBBB      Y     EEEE    ");
+        System.out.println("    B   B     Y     E        B   B     Y     E       ");
+        System.out.println("    BBBB      Y     EEEE     BBBB      Y     EEEE    ");
+        System.out.println("=====================================================");
+        System.out.println("                 See you next time!                  ");
+
     }
 }
