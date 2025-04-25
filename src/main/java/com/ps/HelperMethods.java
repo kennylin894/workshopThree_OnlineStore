@@ -17,6 +17,7 @@ public class HelperMethods {
 
     static double totalPaid;
     static double totalChange;
+
     public static ArrayList<Product> getInventory() {
         ArrayList<Product> products = new ArrayList<>();
         String line;
@@ -92,27 +93,21 @@ public class HelperMethods {
         boolean found = false;
         for (Product product : cart) {
             if (name.toLowerCase().equals(product.getSku().toLowerCase())) {
-                if(product.getCount() == 1)
-                {
+                if (product.getCount() == 1) {
                     cart.remove(product);
                     System.out.println(product.getName() + " - " + product.getCount() + "x" + " has been successfully removed from the cart");
                     found = true;
                     break;
-                }
-                else if(product.getCount() > 1)
-                {
+                } else if (product.getCount() > 1) {
                     System.out.println("How many of this item would you like to remove?");
                     Scanner scanner = new Scanner(System.in);
                     int count = scanner.nextInt();
-                    if(product.getCount() == count)
-                    {
+                    if (product.getCount() == count) {
                         cart.remove(product);
                         System.out.println(product.getName() + " - " + product.getCount() + "x" + " has been successfully removed from the cart");
                         found = true;
                         break;
-                    }
-                    else
-                    {
+                    } else {
                         int newCount = product.getCount() - count;
                         product.setCount(newCount);
                         System.out.println(product.getName() + " - " + product.getCount() + "x" + " has been successfully removed from the cart");
@@ -127,34 +122,30 @@ public class HelperMethods {
         }
     }
 
-    public static int verifyPayment(double userTotalPayment,double cartTotal,ArrayList<Product> cart)
-    {
+    public static int verifyPayment(double userTotalPayment, double cartTotal, ArrayList<Product> cart) {
         Scanner scanner = new Scanner(System.in);
         double change;
         //user paid exactly enough
-        if(userTotalPayment == cartTotal)
-        {
+        if (userTotalPayment == cartTotal) {
             System.out.println("Thank you for shopping with us.");
             System.out.println("Your payment was successful.");
             totalPaid = userTotalPayment;
             totalChange = 0.00;
-            System.out.println(printreceipt(cart,totalPaid));
+            System.out.println(printreceipt(cart, totalPaid));
             cart.clear();
             return 1;
         }
         //user paid more than total
-        else if(userTotalPayment > cartTotal)
-        {
+        else if (userTotalPayment > cartTotal) {
             change = userTotalPayment - cartTotal;
             totalPaid = userTotalPayment;
             totalChange = change;
-            System.out.println(printreceipt(cart,totalPaid));
+            System.out.println(printreceipt(cart, totalPaid));
             cart.clear();
             return 1;
         }
         //user paid less than total
-        else
-        {
+        else {
             while (userTotalPayment < cartTotal) {
                 double missing = cartTotal - userTotalPayment;
                 System.out.println("You are missing $" + missing);
@@ -162,19 +153,14 @@ public class HelperMethods {
                 System.out.println("[1] Yes");
                 System.out.println("[2] No");
                 int enough = scanner.nextInt();
-                if(enough == 1)
-                {
+                if (enough == 1) {
                     System.out.print("Please enter the rest of the payment: ");
                     double additionalPayment = scanner.nextDouble();
                     userTotalPayment += additionalPayment;
-                }
-                else if(enough == 2 )
-                {
+                } else if (enough == 2) {
                     System.out.println("Damn you broke.");
                     return -1;
-                }
-                else
-                {
+                } else {
                     System.out.println("Invalid input, try again.");
                 }
             }
@@ -184,14 +170,13 @@ public class HelperMethods {
             if (change > 0) {
                 totalChange = change;
             }
-            System.out.println(printreceipt(cart,totalPaid));
+            System.out.println(printreceipt(cart, totalPaid));
             cart.clear();
             return 1;
         }
     }
 
-    public static StringBuilder printreceipt(ArrayList<Product> cart,double total)
-    {
+    public static StringBuilder printreceipt(ArrayList<Product> cart, double total) {
         System.out.println("=======================");
         System.out.println("     SALES RECEIPT     ");
         System.out.println("=======================");
@@ -202,7 +187,7 @@ public class HelperMethods {
         receipt.append("\n");
         int loopNum = 1;
         for (Product product : cart) {
-            receipt.append("[" + loopNum + "] " +product.getName() + " - $" + product.getPrice() +  " - " + product.getCount() + "x");
+            receipt.append("[" + loopNum + "] " + product.getName() + " - $" + product.getPrice() + " - " + product.getCount() + "x");
             receipt.append('\n');
             loopNum++;
         }
@@ -214,15 +199,12 @@ public class HelperMethods {
         receipt.append("=========================").append("\n");
         receipt.append(" Thank you for shopping! ").append("\n");
         receipt.append("=========================");
-        try
-        {
+        try {
             FileWriter fileWriter = new FileWriter("Receipts/" + fileDate + ".txt");
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(receipt.toString());
             bufferedWriter.close();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Error generating receipt.");
         }
         return receipt;

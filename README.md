@@ -56,7 +56,7 @@ The store uses a `products.csv` file as its inventory source.
 
   - 🔎 Search or filter by price (greater than/less than a certain price)
   
-  ![img_9.png](img_9.png)
+  ![img_12.png](img_12.png)
 
   - ➕ Add items to the cart
   
