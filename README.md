@@ -32,9 +32,11 @@ The store uses a `products.csv` file as its inventory source.
   - 🛍️ Display Products
   
   ![img.png](img.png)
+
   - 🛒 Display Cart
   
   ![img_1.png](img_1.png)
+
   - ❌ Exit
   
   ![img_2.png](img_2.png)
@@ -44,9 +46,18 @@ The store uses a `products.csv` file as its inventory source.
   
   ![img_3.png](img_3.png)
     
-  - 🔎 Search or filter by product name, price, or department
+  - 🔎 Search or filter by product name/sku
+  
+  ![img_10.png](img_10.png)
+  
+  - 🔎 Search or filter by departments available
   
   ![img_5.png](img_5.png)
+
+  - 🔎 Search or filter by price (greater than/less than a certain price)
+  
+  ![img_9.png](img_9.png)
+
   - ➕ Add items to the cart
   
   ![img_4.png](img_4.png)
@@ -68,6 +79,7 @@ The store uses a `products.csv` file as its inventory source.
     - 🧹 Clears the cart after purchase
   
   ![img_7.png](img_7.png)
+
 - 🛒 Smart cart quantity management
     - 📦 Same items are grouped with quantity shown
 - 📝 Receipt file creation
