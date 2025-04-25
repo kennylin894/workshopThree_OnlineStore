@@ -90,12 +90,12 @@ public class HelperMethods {
 
     public static void removeFromCart(String name, ArrayList<Product> cart) {
         boolean found = false;
-        int removeCount = 1;
         for (Product product : cart) {
             if (name.toLowerCase().equals(product.getSku().toLowerCase())) {
                 if(product.getCount() == 1)
                 {
                     cart.remove(product);
+                    System.out.println(product.getName() + " - " + product.getCount() + "x" + " has been successfully removed from the cart");
                     found = true;
                     break;
                 }
@@ -104,10 +104,10 @@ public class HelperMethods {
                     System.out.println("How many of this item would you like to remove?");
                     Scanner scanner = new Scanner(System.in);
                     int count = scanner.nextInt();
-                    removeCount = count;
                     if(product.getCount() == count)
                     {
                         cart.remove(product);
+                        System.out.println(product.getName() + " - " + product.getCount() + "x" + " has been successfully removed from the cart");
                         found = true;
                         break;
                     }
@@ -115,15 +115,14 @@ public class HelperMethods {
                     {
                         int newCount = product.getCount() - count;
                         product.setCount(newCount);
+                        System.out.println(product.getName() + " - " + product.getCount() + "x" + " has been successfully removed from the cart");
                         found = true;
                         break;
                     }
                 }
             }
         }
-        if (found == true) {
-            System.out.println(removeCount + "x of " + name + " has been successfully removed from your cart.");
-        } else {
+        if (found == false) {
             System.out.println("Item doesn't exist in your cart.");
         }
     }

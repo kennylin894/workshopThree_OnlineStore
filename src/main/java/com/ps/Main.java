@@ -31,7 +31,7 @@ public class Main {
                 case 1:
                     System.out.println("SKU|Product Name|Price|Department");
                     for (Product product : inv) {
-                        System.out.println(product.getSku() + "|" + product.getName() + "|" + product.getPrice() + "|" + product.getDepartment());
+                        System.out.println(product.getSku() + "|" + product.getName() + "|$" + product.getPrice() + "|" + product.getDepartment());
                     }
                     System.out.println();
                     System.out.println("Would you like to add something to the cart?");
@@ -54,7 +54,7 @@ public class Main {
                             }
                         }
                         if (found == false) {
-                            System.out.println("Item doesnt exist, not added to cart");
+                            System.out.println("Item doesnt exist, not added to cart.");
                             System.out.println();
                         }
                     }
@@ -68,7 +68,7 @@ public class Main {
                     if(userFilterCategory.toLowerCase().equals("department"))
                     {
                         ArrayList<String> departmentCategories = new ArrayList<>();
-                        System.out.println("These are the following departments");
+                        System.out.println("These are the following departments.");
                         for(Product product:inv)
                         {
                             String department = product.getDepartment();
@@ -95,7 +95,7 @@ public class Main {
                     //gets all the filtered products
                     ArrayList<Product> filteredProducts = HelperMethods.filteredDisplayProducts(userFilterCategory, userFilterValue, priceFilter);
                     for (Product product : filteredProducts) {
-                        System.out.println(product.getSku() + "|" + product.getName() + "|" + product.getPrice() + "|" + product.getDepartment());
+                        System.out.println(product.getSku() + "|" + product.getName() + "|$" + product.getPrice() + "|" + product.getDepartment());
                     }
                     System.out.println();
                     if (filteredProducts.isEmpty()) {
@@ -119,9 +119,10 @@ public class Main {
                                     System.out.println(product.getName() + " - " + product.getCount() + "x" + " has been successfully added to cart");
                                     found = true;
                                 }
+
                             }
                             if (found == false) {
-                                System.out.println("Item doesnt exist, not added to cart");
+                                System.out.println("Item doesnt exist, not added to cart.");
                                 System.out.println();
                             }
                         }
@@ -156,7 +157,7 @@ public class Main {
                             System.out.println();
                         } else {
                             for (Product product : cart) {
-                                System.out.println(product.getSku() + "|" + product.getName() + "|" + product.getPrice() + "|" + product.getDepartment() + "| x - " + product.getCount());
+                                System.out.println(product.getSku() + "|" + product.getName() + "|$" + product.getPrice() + "|" + product.getDepartment() + "| x - " + product.getCount());
                             }
                             //prints the carts total value
                             System.out.println("Your total is: $" + HelperMethods.getTotal(cart));
@@ -164,15 +165,15 @@ public class Main {
                         }
                     } else if (cartInput == 3) {
                         if (cart.isEmpty()) {
-                            System.out.println("Your cart is empty");
+                            System.out.println("Your cart is empty.");
                             System.out.println();
                             break;
                         } else {
                             System.out.println("What item would you like to remove?");
                             for (Product product : cart) {
-                                System.out.println(product.getName() + "-" + product.getPrice() + "|" + product.getDepartment() + "| x - " + product.getCount());
+                                System.out.println(product.getSku() + "|" + product.getName() + " - $" + product.getPrice() + "|" + product.getDepartment() + "| x - " + product.getCount());
                             }
-                            System.out.println("Please enter the sku of the item you want to remove");
+                            System.out.println("Please enter the sku of the item you want to remove.");
                             String sku = stringScanner.nextLine();
                             HelperMethods.removeFromCart(sku, cart);
                         }
