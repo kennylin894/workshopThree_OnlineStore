@@ -38,11 +38,14 @@ public class Main {
                     System.out.println("2) No - Exit");
                     addCart = intScanner.nextInt();
                     if (addCart == 1) {
-                        System.out.println("Please enter the name of the item you would like to add.");
+                        System.out.println("Please enter the sku of the item you would like to add.");
                         String item = stringScanner.nextLine();
+                        System.out.println("How many would you like to buy?");
+                        System.out.println("Please enter the amount");
+                        int itemCount = intScanner.nextInt();
                         boolean found = false;
                         for (Product product : inv) {
-                            if (item.toLowerCase().equals(product.getName().toLowerCase())) {
+                            if (item.toLowerCase().equals(product.getSku().toLowerCase())) {
                                 cart.add(product);
                                 found = true;
                             }
@@ -87,11 +90,11 @@ public class Main {
                     System.out.println("2) No - Exit");
                     addCart = intScanner.nextInt();
                     if (addCart == 1) {
-                        System.out.println("Please enter the name of the item you would like to add.");
+                        System.out.println("Please enter the sku of the item you would like to add.");
                         String item = stringScanner.nextLine();
                         boolean found = false;
                         for (Product product : filteredProducts) {
-                            if (item.toLowerCase().equals(product.getName().toLowerCase())) {
+                            if (item.toLowerCase().equals(product.getSku().toLowerCase())) {
                                 cart.add(product);
                                 found = true;
                             }
@@ -112,8 +115,23 @@ public class Main {
                     System.out.println("2) View Cart");
                     System.out.println("3) Remove Item From Cart");
                     int cartInput = intScanner.nextInt();
+                    //user wants to check out
                     if (cartInput == 1) {
+                        System.out.println("Welcome to the checkout.");
+                        double cartTotal = HelperMethods.getTotal(cart);
+                        System.out.println("Your total will be $" + cartTotal);
+                        System.out.println("Please enter your payment amount.");
+                        double payment = intScanner.nextDouble();
+                        //payment was successful
+                        if(HelperMethods.verifyPayment(payment,cartTotal,cart) == 1)
+                        {
 
+                        }
+                        //payment was not successful
+                        else if(HelperMethods.verifyPayment(payment,cartTotal,cart) == -1)
+                        {
+
+                        }
                     } else if (cartInput == 2) {
                         //checks if the users cart is empty
                         if (cart.isEmpty()) {
@@ -134,13 +152,12 @@ public class Main {
                             break;
                         } else {
                             System.out.println("What item would you like to remove?");
-                            for(Product product: cart)
-                            {
+                            for (Product product : cart) {
                                 System.out.println(product.getSku() + "|" + product.getName() + "|" + product.getPrice() + "|" + product.getDepartment());
                             }
-                            System.out.println("Please enter the name of the item you want to remove");
-                            String name = stringScanner.nextLine();
-                            HelperMethods.removeFromCart(name, cart);
+                            System.out.println("Please enter the sku of the item you want to remove");
+                            String sku = stringScanner.nextLine();
+                            HelperMethods.removeFromCart(sku, cart);
                         }
                     }
             }
