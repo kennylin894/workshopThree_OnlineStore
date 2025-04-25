@@ -34,13 +34,13 @@ public class HelperMethods {
         ArrayList<Product> filteredProducts = new ArrayList<>();
         if (filterBy.toLowerCase().equals("sku")) {
             for (Product product : getInventory()) {
-                if (product.getSku().toLowerCase().equals(searchedValue)) {
+                if (product.getSku().toLowerCase().equals(searchedValue.toLowerCase())) {
                     filteredProducts.add(product);
                 }
             }
         } else if (filterBy.toLowerCase().equals("name")) {
             for (Product product : getInventory()) {
-                if (product.getName().toLowerCase().equals(searchedValue)) {
+                if (product.getName().toLowerCase().equals(searchedValue.toLowerCase())) {
                     filteredProducts.add(product);
                 }
             }
@@ -54,7 +54,7 @@ public class HelperMethods {
             }
             //greater than
         } else if (filterBy.toLowerCase().equals("price") && priceFilter == 2) {
-            Double searchedValueDouble = Double.parseDouble(searchedValue);
+            Double searchedValueDouble = Double.parseDouble(searchedValue.toLowerCase());
             for (Product product : getInventory()) {
                 if (product.getPrice() >= searchedValueDouble) {
                     filteredProducts.add(product);
@@ -62,7 +62,7 @@ public class HelperMethods {
             }
         } else if (filterBy.toLowerCase().equals("department")) {
             for (Product product : getInventory()) {
-                if (product.getDepartment().toLowerCase().equals(searchedValue)) {
+                if (product.getDepartment().toLowerCase().equals(searchedValue.toLowerCase())) {
                     filteredProducts.add(product);
                 }
             }
