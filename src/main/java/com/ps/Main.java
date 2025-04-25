@@ -49,13 +49,11 @@ public class Main {
                             if (item.toLowerCase().equals(product.getSku().toLowerCase())) {
                                 cart.add(product);
                                 product.setCount(itemCount);
+                                System.out.println(product.getName() + " - " + product.getCount() + "x" + " has been successfully added to cart");
                                 found = true;
                             }
                         }
-                        if (found == true) {
-                            System.out.println("Your Product has been successfully added to cart");
-                            System.out.println();
-                        } else {
+                        if (found == false) {
                             System.out.println("Item doesnt exist, not added to cart");
                             System.out.println();
                         }
@@ -118,13 +116,11 @@ public class Main {
                                 if (item.toLowerCase().equals(product.getSku().toLowerCase())) {
                                     cart.add(product);
                                     product.setCount(itemCount);
+                                    System.out.println(product.getName() + " - " + product.getCount() + "x" + " has been successfully added to cart");
                                     found = true;
                                 }
                             }
-                            if (found == true) {
-                                System.out.println("Your Product has been successfully added to cart");
-                                System.out.println();
-                            } else {
+                            if (found == false) {
                                 System.out.println("Item doesnt exist, not added to cart");
                                 System.out.println();
                             }
