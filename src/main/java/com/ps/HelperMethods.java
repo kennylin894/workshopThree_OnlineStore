@@ -160,8 +160,8 @@ public class HelperMethods {
                 double missing = cartTotal - userTotalPayment;
                 System.out.println("You are missing $" + missing);
                 System.out.println("Do you have enough?");
-                System.out.println("1) Yes");
-                System.out.println("2) No");
+                System.out.println("[1] Yes");
+                System.out.println("[2] No");
                 int enough = scanner.nextInt();
                 if(enough == 1)
                 {
@@ -203,7 +203,7 @@ public class HelperMethods {
         receipt.append("\n");
         int loopNum = 1;
         for (Product product : cart) {
-            receipt.append(loopNum + ") " +product.getName() + " - $" + product.getPrice() +  " - " + product.getCount() + "x");
+            receipt.append("[" + loopNum + "] " +product.getName() + " - $" + product.getPrice() +  " - " + product.getCount() + "x");
             receipt.append('\n');
             loopNum++;
         }

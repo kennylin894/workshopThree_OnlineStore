@@ -21,10 +21,10 @@ public class Main {
         do {
             System.out.println("Would you like to:");
             System.out.println("==================");
-            System.out.println("1) Display Products");
-            System.out.println("2) Search For Products");
-            System.out.println("3) Display Cart");
-            System.out.println("0) Exit");
+            System.out.println("[1] Display Products");
+            System.out.println("[2] Search For Products");
+            System.out.println("[3] Display Cart");
+            System.out.println("[0] Exit");
             mainMenuCommand = mainMenuScanner.nextInt();
             switch (mainMenuCommand) {
                 //display the products
@@ -35,8 +35,8 @@ public class Main {
                     }
                     System.out.println();
                     System.out.println("Would you like to add something to the cart?");
-                    System.out.println("1) Yes");
-                    System.out.println("2) No - Exit");
+                    System.out.println("[1] Yes");
+                    System.out.println("[2] No - Exit");
                     addCart = intScanner.nextInt();
                     if (addCart == 1) {
                         System.out.println("Please enter the sku of the item you would like to add.");
@@ -83,8 +83,8 @@ public class Main {
                     }
                     if (userFilterCategory.toLowerCase().equals("price")) {
                         System.out.println("Less than or greater than a certain price?");
-                        System.out.println("1) Less Than");
-                        System.out.println("2) Greater Than");
+                        System.out.println("[1] Less Than");
+                        System.out.println("[2] Greater Than");
                         priceFilter = intScanner.nextDouble();
                         if (priceFilter > 2) {
                             System.out.println("Please enter a valid number.");
@@ -104,8 +104,8 @@ public class Main {
                         System.out.println("Invalid Category, please try again.");
                     } else {
                         System.out.println("Would you like to add something to the cart?");
-                        System.out.println("1) Yes");
-                        System.out.println("2) No - Exit");
+                        System.out.println("[1] Yes");
+                        System.out.println("[2] No - Exit");
                         addCart = intScanner.nextInt();
                         if (addCart == 1) {
                             System.out.println("Please enter the sku of the item you would like to add.");
@@ -134,9 +134,9 @@ public class Main {
                 //displays your cart
                 case 3:
                     System.out.println("Would you like to");
-                    System.out.println("1) Check Out: ");
-                    System.out.println("2) View Cart");
-                    System.out.println("3) Remove Item From Cart");
+                    System.out.println("[1] Check Out: ");
+                    System.out.println("[2] View Cart");
+                    System.out.println("[3] Remove Item From Cart");
                     int cartInput = intScanner.nextInt();
                     //user wants to check out
                     if (cartInput == 1) {
