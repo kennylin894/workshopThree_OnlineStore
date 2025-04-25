@@ -71,7 +71,7 @@ The store uses a `products.csv` file as its inventory source.
   
   ![img_6.png](img_6.png)
 
-### ✅ Bonus Features
+### ✅ Payment Verification and Receipt Feature
 - 💵 Cash-based checkout system
     - 🧾 Validates payment amount
     - 💸 Calculates and displays change
