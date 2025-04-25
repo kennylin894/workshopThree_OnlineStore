@@ -41,12 +41,13 @@ public class Main {
                         System.out.println("Please enter the sku of the item you would like to add.");
                         String item = stringScanner.nextLine();
                         System.out.println("How many would you like to buy?");
-                        System.out.println("Please enter the amount");
+                        System.out.println("Please enter the amount:");
                         int itemCount = intScanner.nextInt();
                         boolean found = false;
                         for (Product product : inv) {
                             if (item.toLowerCase().equals(product.getSku().toLowerCase())) {
                                 cart.add(product);
+                                product.setCount(itemCount);
                                 found = true;
                             }
                         }
@@ -92,10 +93,14 @@ public class Main {
                     if (addCart == 1) {
                         System.out.println("Please enter the sku of the item you would like to add.");
                         String item = stringScanner.nextLine();
+                        System.out.println("How many would you like to buy?");
+                        System.out.println("Please enter the amount:");
+                        int itemCount = intScanner.nextInt();
                         boolean found = false;
                         for (Product product : filteredProducts) {
                             if (item.toLowerCase().equals(product.getSku().toLowerCase())) {
                                 cart.add(product);
+                                product.setCount(itemCount);
                                 found = true;
                             }
                         }
@@ -139,7 +144,7 @@ public class Main {
                             System.out.println();
                         } else {
                             for (Product product : cart) {
-                                System.out.println(product.getSku() + "|" + product.getName() + "|" + product.getPrice() + "|" + product.getDepartment());
+                                System.out.println(product.getSku() + "|" + product.getName() + "|" + product.getPrice() + "|" + product.getDepartment()  + "|x - " + product.getCount());
                             }
                             //prints the carts total value
                             System.out.println("Your total is: $" + HelperMethods.getTotal(cart));
@@ -153,7 +158,7 @@ public class Main {
                         } else {
                             System.out.println("What item would you like to remove?");
                             for (Product product : cart) {
-                                System.out.println(product.getSku() + "|" + product.getName() + "|" + product.getPrice() + "|" + product.getDepartment());
+                                System.out.println(product.getSku() + "|" + product.getName() + "|" + product.getPrice() + "|" + product.getDepartment()  + "|x - " + product.getCount());
                             }
                             System.out.println("Please enter the sku of the item you want to remove");
                             String sku = stringScanner.nextLine();

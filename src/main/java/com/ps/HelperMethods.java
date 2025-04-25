@@ -73,22 +73,46 @@ public class HelperMethods {
     public static double getTotal(ArrayList<Product> cart) {
         double total = 0;
         for (Product product : cart) {
-            total += product.getPrice();
+            total += product.getPrice() * product.getCount();
         }
-        return total;
+        return Math.round(total * 100.0) / 100.0;
     }
 
     public static void removeFromCart(String name, ArrayList<Product> cart) {
         boolean found = false;
+        int removeCount = 1;
         for (Product product : cart) {
             if (name.toLowerCase().equals(product.getSku().toLowerCase())) {
-                cart.remove(product);
-                found = true;
-                break;
+                if(product.getCount() == 1)
+                {
+                    cart.remove(product);
+                    found = true;
+                    break;
+                }
+                else if(product.getCount() > 1)
+                {
+                    System.out.println("How many of this item would you like to remove?");
+                    Scanner scanner = new Scanner(System.in);
+                    int count = scanner.nextInt();
+                    removeCount = count;
+                    if(product.getCount() == count)
+                    {
+                        cart.remove(product);
+                        found = true;
+                        break;
+                    }
+                    else
+                    {
+                        int newCount = product.getCount() - count;
+                        product.setCount(newCount);
+                        found = true;
+                        break;
+                    }
+                }
             }
         }
         if (found == true) {
-            System.out.println(name + "has been successfully removed from your cart.");
+            System.out.println(removeCount + "x of " + name + " has been successfully removed from your cart.");
         } else {
             System.out.println("Item doesn't exist in your cart.");
         }
