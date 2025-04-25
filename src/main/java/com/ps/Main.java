@@ -15,6 +15,7 @@ public class Main {
         System.out.println("Welcome to the Online-Store");
         System.out.println("===========================");
         ArrayList<Product> cart = new ArrayList<>();
+        ArrayList<Product> inv = HelperMethods.getInventory();
         int mainMenuCommand;
         int addCart;
         do {
@@ -28,7 +29,6 @@ public class Main {
                 //display the products
                 case 1:
                     System.out.println("SKU|Product Name|Price|Department");
-                    ArrayList<Product> inv = HelperMethods.getInventory();
                     for (Product product : inv) {
                         System.out.println(product.getSku() + "|" + product.getName() + "|" + product.getPrice() + "|" + product.getDepartment());
                     }
@@ -62,10 +62,24 @@ public class Main {
                     break;
                 //display products based on a filter
                 case 2:
-                    System.out.println("Enter what you would like to search by?");
+                    System.out.println("What category you would like to search by?");
                     System.out.println("SKU,Name,Price,Department");
                     String userFilterCategory = stringScanner.nextLine();
                     double priceFilter = 0.00;
+                    if(userFilterCategory.toLowerCase().equals("department"))
+                    {
+                        ArrayList<String> departmentCategories = new ArrayList<>();
+                        System.out.println("These are the following departments");
+                        for(Product product:inv)
+                        {
+                            String department = product.getDepartment();
+                            if(!departmentCategories.contains(department))
+                            {
+                                departmentCategories.add(department);
+                                System.out.println("- " + department);
+                            }
+                        }
+                    }
                     if (userFilterCategory.toLowerCase().equals("price")) {
                         System.out.println("Less than or greater than a certain price?");
                         System.out.println("1) Less Than");
@@ -85,31 +99,34 @@ public class Main {
                         System.out.println(product.getSku() + "|" + product.getName() + "|" + product.getPrice() + "|" + product.getDepartment());
                     }
                     System.out.println();
-                    System.out.println();
-                    System.out.println("Would you like to add something to the cart?");
-                    System.out.println("1) Yes");
-                    System.out.println("2) No - Exit");
-                    addCart = intScanner.nextInt();
-                    if (addCart == 1) {
-                        System.out.println("Please enter the sku of the item you would like to add.");
-                        String item = stringScanner.nextLine();
-                        System.out.println("How many would you like to buy?");
-                        System.out.println("Please enter the amount:");
-                        int itemCount = intScanner.nextInt();
-                        boolean found = false;
-                        for (Product product : filteredProducts) {
-                            if (item.toLowerCase().equals(product.getSku().toLowerCase())) {
-                                cart.add(product);
-                                product.setCount(itemCount);
-                                found = true;
+                    if (filteredProducts.isEmpty()) {
+                        System.out.println("Invalid Category, please try again.");
+                    } else {
+                        System.out.println("Would you like to add something to the cart?");
+                        System.out.println("1) Yes");
+                        System.out.println("2) No - Exit");
+                        addCart = intScanner.nextInt();
+                        if (addCart == 1) {
+                            System.out.println("Please enter the sku of the item you would like to add.");
+                            String item = stringScanner.nextLine();
+                            System.out.println("How many would you like to buy?");
+                            System.out.println("Please enter the amount:");
+                            int itemCount = intScanner.nextInt();
+                            boolean found = false;
+                            for (Product product : filteredProducts) {
+                                if (item.toLowerCase().equals(product.getSku().toLowerCase())) {
+                                    cart.add(product);
+                                    product.setCount(itemCount);
+                                    found = true;
+                                }
                             }
-                        }
-                        if (found == true) {
-                            System.out.println("Your Product has been successfully added to cart");
-                            System.out.println();
-                        } else {
-                            System.out.println("Item doesnt exist, not added to cart");
-                            System.out.println();
+                            if (found == true) {
+                                System.out.println("Your Product has been successfully added to cart");
+                                System.out.println();
+                            } else {
+                                System.out.println("Item doesnt exist, not added to cart");
+                                System.out.println();
+                            }
                         }
                     }
                     break;
@@ -128,15 +145,7 @@ public class Main {
                         System.out.println("Please enter your payment amount.");
                         double payment = intScanner.nextDouble();
                         //payment was successful
-                        if(HelperMethods.verifyPayment(payment,cartTotal,cart) == 1)
-                        {
-
-                        }
-                        //payment was not successful
-                        else if(HelperMethods.verifyPayment(payment,cartTotal,cart) == -1)
-                        {
-
-                        }
+                        HelperMethods.verifyPayment(payment, cartTotal, cart);
                     } else if (cartInput == 2) {
                         //checks if the users cart is empty
                         if (cart.isEmpty()) {
@@ -144,7 +153,7 @@ public class Main {
                             System.out.println();
                         } else {
                             for (Product product : cart) {
-                                System.out.println(product.getSku() + "|" + product.getName() + "|" + product.getPrice() + "|" + product.getDepartment()  + "|x - " + product.getCount());
+                                System.out.println(product.getSku() + "|" + product.getName() + "|" + product.getPrice() + "|" + product.getDepartment() + "|x - " + product.getCount());
                             }
                             //prints the carts total value
                             System.out.println("Your total is: $" + HelperMethods.getTotal(cart));
@@ -158,7 +167,7 @@ public class Main {
                         } else {
                             System.out.println("What item would you like to remove?");
                             for (Product product : cart) {
-                                System.out.println(product.getSku() + "|" + product.getName() + "|" + product.getPrice() + "|" + product.getDepartment()  + "|x - " + product.getCount());
+                                System.out.println(product.getSku() + "|" + product.getName() + "|" + product.getPrice() + "|" + product.getDepartment() + "|x - " + product.getCount());
                             }
                             System.out.println("Please enter the sku of the item you want to remove");
                             String sku = stringScanner.nextLine();
