@@ -1,12 +1,20 @@
 package com.ps;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
+import java.util.spi.LocaleNameProvider;
 
 public class HelperMethods {
 
+    static double totalPaid;
+    static double totalChange;
     public static ArrayList<Product> getInventory() {
         ArrayList<Product> products = new ArrayList<>();
         String line;
@@ -127,6 +135,9 @@ public class HelperMethods {
         {
             System.out.println("Thank you for shopping with us.");
             System.out.println("Your payment was successful.");
+            totalPaid = userTotalPayment;
+            totalChange = 0.00;
+            System.out.println(printreceipt(cart,totalPaid));
             cart.clear();
             return 1;
         }
@@ -134,13 +145,15 @@ public class HelperMethods {
         else if(userTotalPayment > cartTotal)
         {
             change = userTotalPayment - cartTotal;
-            System.out.println("Thank you for shopping with us.");
-            System.out.println("Here is your change of $" + change);
+            totalPaid = userTotalPayment;
+            totalChange = change;
+            System.out.println(printreceipt(cart,totalPaid));
             cart.clear();
             return 1;
         }
         //user paid less than total
-        else {
+        else
+        {
             while (userTotalPayment < cartTotal) {
                 double missing = cartTotal - userTotalPayment;
                 System.out.println("You are missing $" + missing);
@@ -154,7 +167,7 @@ public class HelperMethods {
                     double additionalPayment = scanner.nextDouble();
                     userTotalPayment += additionalPayment;
                 }
-                else if(enough ==2 )
+                else if(enough == 2 )
                 {
                     System.out.println("Damn you broke.");
                     return -1;
@@ -166,13 +179,37 @@ public class HelperMethods {
             }
             //if user overpaided while under paying
             change = userTotalPayment - cartTotal;
+            totalPaid = userTotalPayment;
             if (change > 0) {
-                System.out.println("Here is your change of $" + change);
+                totalChange = change;
             }
-            System.out.println("Your payment was successful.");
+            System.out.println(printreceipt(cart,totalPaid));
             cart.clear();
             return 1;
         }
+    }
+
+    public static StringBuilder printreceipt(ArrayList<Product> cart,double total)
+    {
+        System.out.println("=======================");
+        System.out.println("     SALES RECEIPT     ");
+        System.out.println("=======================");
+        StringBuilder receipt = new StringBuilder();
+        String currDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        receipt.append("Time of purchase: " + currDate).append("\n");
+        receipt.append("\n");
+        for (Product product : cart) {
+            receipt.append(product.getSku() + "|" + product.getName() + "|" + product.getPrice() + "|" + product.getDepartment() + "| x - " + product.getCount());
+        }
+        receipt.append("\n");
+        receipt.append("\n");
+        receipt.append("Total : $" + Math.round(getTotal(cart) * 100.0) / 100.0).append("\n");
+        receipt.append("Amount Paid: $" + Math.round(totalPaid * 100.0) / 100.0).append("\n");
+        receipt.append("Change: $" + Math.round(totalChange * 100.0) / 100.0).append("\n");
+        receipt.append("=========================").append("\n");
+        receipt.append(" Thank you for shopping! ").append("\n");
+        receipt.append("=========================");
+        return receipt;
     }
 }
 
