@@ -3,7 +3,9 @@ package com.ps;
 import org.w3c.dom.ls.LSOutput;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -196,10 +198,14 @@ public class HelperMethods {
         System.out.println("=======================");
         StringBuilder receipt = new StringBuilder();
         String currDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        String fileDate = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         receipt.append("Time of purchase: " + currDate).append("\n");
         receipt.append("\n");
+        int loopNum = 1;
         for (Product product : cart) {
-            receipt.append(product.getSku() + "|" + product.getName() + "|" + product.getPrice() + "|" + product.getDepartment() + "| x - " + product.getCount());
+            receipt.append(loopNum + ") " +product.getName() + " - $" + product.getPrice() +  " - " + product.getCount() + "x");
+            receipt.append('\n');
+            loopNum++;
         }
         receipt.append("\n");
         receipt.append("\n");
@@ -209,6 +215,18 @@ public class HelperMethods {
         receipt.append("=========================").append("\n");
         receipt.append(" Thank you for shopping! ").append("\n");
         receipt.append("=========================");
+        try
+        {
+            System.out.println("Printing Receipt.");
+            FileWriter fileWriter = new FileWriter("Receipts/" + fileDate + ".txt");
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(receipt.toString());
+            bufferedWriter.close();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error generating receipt.");
+        }
         return receipt;
     }
 }

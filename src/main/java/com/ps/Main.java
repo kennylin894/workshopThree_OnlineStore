@@ -20,6 +20,7 @@ public class Main {
         int addCart;
         do {
             System.out.println("Would you like to:");
+            System.out.println("==================");
             System.out.println("1) Display Products");
             System.out.println("2) Search For Products");
             System.out.println("3) Display Cart");
@@ -167,7 +168,7 @@ public class Main {
                         } else {
                             System.out.println("What item would you like to remove?");
                             for (Product product : cart) {
-                                System.out.println(product.getSku() + "|" + product.getName() + "|" + product.getPrice() + "|" + product.getDepartment() + "| x - " + product.getCount());
+                                System.out.println(product.getName() + "-" + product.getPrice() + "|" + product.getDepartment() + "| x - " + product.getCount());
                             }
                             System.out.println("Please enter the sku of the item you want to remove");
                             String sku = stringScanner.nextLine();
