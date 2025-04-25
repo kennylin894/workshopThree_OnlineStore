@@ -140,6 +140,11 @@ public class Main {
                     int cartInput = intScanner.nextInt();
                     //user wants to check out
                     if (cartInput == 1) {
+                        if(cart.isEmpty())
+                        {
+                            System.out.println("Your cart is empty.");
+                            break;
+                        }
                         System.out.println("Welcome to the checkout.");
                         double cartTotal = HelperMethods.getTotal(cart);
                         System.out.println("Your total will be $" + cartTotal);
